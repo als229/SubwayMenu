@@ -24,20 +24,20 @@ public class MainMenu {
 
 	public void mainMenu() {
 
-		System.out.println("안녕하세요 서브웨이 kh점입니다~");
-		System.out.println("온도체크 후 QR인증 부탁드려요 ㅎㅎ\n");
-		System.out.println("재료 소진으로 인해 1인당 1개만 주문 가능합니다.");
-		System.out.print("카드 잔액을 입력하세요. : ");
-		int myCoin = Integer.parseInt(sc.nextLine());
-		int menuPrice = 0;
-		System.out.println();
-		if (myCoin < 4000) {
-			System.out.println("4000원 이하는 나가주시죠 ㅋㅋ~~zzz");
-			return;
-		} else {
-			System.out.println("귀하의 잔액은 " + myCoin + "￦ 입니다");
-		}
-		Outer: while (true) {
+		while (true) {
+			System.out.println("안녕하세요 서브웨이 kh점입니다~");
+			System.out.println("온도체크 후 QR인증 부탁드려요 ㅎㅎ\n");
+			System.out.println("재료 소진으로 인해 1인당 1개만 주문 가능합니다.");
+			System.out.print("카드 잔액을 입력하세요. : ");
+			int myCoin = Integer.parseInt(sc.nextLine());
+			int menuPrice = 0;
+			System.out.println();
+			if (myCoin < 4000) {
+				System.out.println("4000원 이하는 나가주시죠 ㅋㅋ~~zzz");
+				return;
+			} else {
+				System.out.println("귀하의 잔액은 " + myCoin + "￦ 입니다");
+			}
 			System.out.println();
 			System.out.println("======== 서브웨이 메뉴판 ==========");
 			System.out.println();
@@ -110,84 +110,79 @@ public class MainMenu {
 				mainMenu();
 			}
 
-			while (true) {
+			System.out.println("\n빵을 골라주세요.");
+			System.out.println(Arrays.toString(breadView));
+			System.out.print(" >> ");
+			String bread = sc.nextLine();
 
-				System.out.println("\n빵을 골라주세요.");
-				System.out.println(Arrays.toString(breadView));
+			System.out.println("\n치즈를 골라주세요.");
+			System.out.println(Arrays.toString(cheeseView));
+			System.out.print(" >> ");
+			String cheese = sc.nextLine();
+
+			System.out.println("\n제외할 야채를 골라주세요. 다먹을거면 엔터를 연타하세요. 그리고 순서대로 입력 안하면 아무것도 안줌.");
+			System.out.println(Arrays.toString(vegetableView));
+			String vegetable = null;
+			int count = 0;
+			for (int i = 0; i < vegetableView.length; i++) {
 				System.out.print(" >> ");
-				String bread = sc.nextLine();
-
-
-				System.out.println("\n치즈를 골라주세요.");
-				System.out.println(Arrays.toString(cheeseView));
-				System.out.print(" >> ");
-				String cheese = sc.nextLine();
-
-				System.out.println("\n제외할 야채를 골라주세요. 다먹을거면 엔터를 연타하세요. 그리고 순서대로 입력 안하면 아무것도 안줌.");
-				System.out.println(Arrays.toString(vegetableView));
-				String vegetable = null;
-				int count = 0;
-				for (int i = 0; i < vegetableView.length; i++) {
-					System.out.print(" >> ");
-					vegetable = sc.nextLine();
-					if (vegetableView[i].equals(vegetable)) {
-						vegetableView[i] = "";
-						count++;
-					}
-
-				}
-
-				vegetable = "";
-				String[] realvegetable = new String[vegetableView.length - count];
-				for (int i = 0; i < vegetableView.length; i++) {
-
-					for (int j = 0; j < realvegetable.length; j++) {
-						if (vegetableView[i] != "") {
-							realvegetable[j] = vegetableView[i];
-							vegetable += realvegetable[j];
-							vegetable += " ";
-							break;
-						}
-
-					}
-				}
-
-				System.out.println("\n소스를 골라주세요. 3가지만 받겠습니다.");
-				System.out.println(Arrays.toString(sauceView));
-				String sauce = "";
-				for (int i = 0; i < 3; i++) {
-					System.out.print(" >> ");
-					sauce += sc.nextLine();
-					sauce += " ";
-				}
-
-				if (set) {
-					System.out.println("\n쿠키를 골라주세요.");
-					System.out.println(Arrays.toString(cookieView));
-					System.out.print(" >> ");
-					String cookie = sc.nextLine();
-					System.out.println("\n음료를 골라주세요.");
-					System.out.println(Arrays.toString(drinkView));
-					System.out.print(" >> ");
-					String drink = sc.nextLine();
-					sub.insertMenu(name, menuPrice, bread, cheese, vegetable, sauce, cookie, drink);
-					System.out.println("\n주문하신 " + name + "세트 나왔습니다.");
-					System.out.println("\n" + sub.printMenu() + "\n쿠키는 " + cookie + ", 음료는 " + drink + "입니다.");
-					break Outer;
-
-				} else {
-
-					System.out.println("\n주문하신 " + name + "단품 나왔습니다.");
-					sub.insertMenu(name, menuPrice, bread, cheese, vegetable, sauce);
-					System.out.println("\n" + sub.printMenu());
-					break Outer;
+				vegetable = sc.nextLine();
+				if (vegetableView[i].equals(vegetable)) {
+					vegetableView[i] = "";
+					count++;
 				}
 
 			}
 
+			vegetable = "";
+			String[] realvegetable = new String[vegetableView.length - count];
+			for (int i = 0; i < vegetableView.length; i++) {
+
+				for (int j = 0; j < realvegetable.length; j++) {
+					if (vegetableView[i] != "") {
+						realvegetable[j] = vegetableView[i];
+						vegetable += realvegetable[j];
+						vegetable += " ";
+						break;
+					}
+
+				}
+			}
+
+			System.out.println("\n소스를 골라주세요. 3가지만 받겠습니다.");
+			System.out.println(Arrays.toString(sauceView));
+			String sauce = "";
+			for (int i = 0; i < 3; i++) {
+				System.out.print(" >> ");
+				sauce += sc.nextLine();
+				sauce += " ";
+			}
+
+			if (set) {
+				System.out.println("\n쿠키를 골라주세요.");
+				System.out.println(Arrays.toString(cookieView));
+				System.out.print(" >> ");
+				String cookie = sc.nextLine();
+				System.out.println("\n음료를 골라주세요.");
+				System.out.println(Arrays.toString(drinkView));
+				System.out.print(" >> ");
+				String drink = sc.nextLine();
+				sub.insertMenu(name, menuPrice, bread, cheese, vegetable, sauce, cookie, drink);
+				System.out.println("\n주문하신 " + name + "세트 나왔습니다.");
+				System.out.println("\n" + sub.printMenu() + "\n쿠키는 " + cookie + ", 음료는 " + drink + "입니다.");
+				
+
+			} else {
+
+				System.out.println("\n주문하신 " + name + "단품 나왔습니다.");
+				sub.insertMenu(name, menuPrice, bread, cheese, vegetable, sauce);
+				System.out.println("\n" + sub.printMenu());
+				
+			}
+
+			System.out.println("맛있게 드세요~");
+			System.out.println("\n귀하의 잔액은 " + myCoin + "￦ 남았습니다.");
+			System.exit(0);
 		}
-		System.out.println("맛있게 드세요~");
-		System.out.println("\n귀하의 잔액은 " + myCoin + "￦ 남았습니다.");
-		System.exit(0);
 	}
 }
